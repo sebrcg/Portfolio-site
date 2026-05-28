@@ -1,4 +1,4 @@
-# portfolio-site
+# Portfolio-site
 
 Source for **[seba.sh](https://seba.sh)** — a hand-built, single-page Cloud /
 DevOps portfolio. Vanilla HTML/CSS/JS, no framework, no build step. Hosted on
@@ -6,7 +6,7 @@ AWS S3 + CloudFront and deployed by GitHub Actions using OIDC (no long-lived
 AWS credentials).
 
 The infrastructure that serves this site lives in a separate repo,
-[`portfolio-tf`](https://github.com/sebrcg/portfolio-tf) (Terraform). This repo
+[`Portfolio-tf`](https://github.com/sebrcg/Portfolio-tf) (Terraform). This repo
 holds only the website itself and the deploy workflow.
 
 ## Files
@@ -41,14 +41,15 @@ CloudFront. The flow:
    (`AssumeRoleWithWebIdentity`) for ~1h temporary credentials.
 3. AWS verifies the token against the registered OIDC provider and the IAM
    role's trust policy (which requires
-   `sub = repo:sebrcg/portfolio-site:ref:refs/heads/main`).
+   `sub = repo:sebrcg/Portfolio-site:ref:refs/heads/main` — case-sensitive,
+   capital P, since GitHub's OIDC sub claim is case-preserved).
 4. The job runs `aws s3 sync` then a CloudFront invalidation.
 
 No AWS keys are stored in GitHub, on disk, or anywhere else.
 
 ### One-time setup
 
-After `terraform apply` succeeds in `portfolio-tf/envs/prod`, read the outputs:
+After `terraform apply` succeeds in `Portfolio-tf/envs/prod`, read the outputs:
 
 ```sh
 terraform output -raw deploy_role_arn

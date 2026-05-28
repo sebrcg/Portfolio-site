@@ -10,7 +10,8 @@
 # No build step: the site is hand-written HTML/CSS/JS, synced as-is.
 # No long-lived AWS keys: GitHub mints a short-lived OIDC token per run; AWS
 # exchanges it for ~1h STS credentials scoped to the role
-# (trust policy requires repo:sebrcg/portfolio-site:ref:refs/heads/main).
+# (trust policy requires repo:sebrcg/Portfolio-site:ref:refs/heads/main —
+# capital P, case-preserved by GitHub's OIDC sub claim).
 
 name: deploy
 
