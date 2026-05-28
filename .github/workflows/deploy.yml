@@ -1,0 +1,63 @@
+# Deploys this static site to S3 + CloudFront on every push to main.
+#
+# Required GitHub Actions repository variables
+# (Settings -> Secrets and variables -> Actions -> Variables tab):
+#   AWS_ROLE_TO_ASSUME          = output `deploy_role_arn` from portfolio-tf
+#   AWS_REGION                  = us-east-1
+#   S3_BUCKET                   = output `bucket_name` from portfolio-tf
+#   CLOUDFRONT_DISTRIBUTION_ID  = output `distribution_id` from portfolio-tf
+#
+# No build step: the site is hand-written HTML/CSS/JS, synced as-is.
+# No long-lived AWS keys: GitHub mints a short-lived OIDC token per run; AWS
+# exchanges it for ~1h STS credentials scoped to the role
+# (trust policy requires repo:sebrcg/portfolio-site:ref:refs/heads/main).
+
+name: deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: # allow manual runs from the Actions tab
+
+# Least-privilege defaults; the OIDC token step needs id-token: write.
+permissions:
+  contents: read
+  id-token: write
+
+concurrency:
+  group: deploy-prod
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configure AWS credentials (OIDC)
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ vars.AWS_ROLE_TO_ASSUME }}
+          aws-region: ${{ vars.AWS_REGION }}
+          role-session-name: gha-${{ github.run_id }}
+
+      # Sync the site files. Repo metadata is excluded. Filenames aren't
+      # content-hashed, so a short cache + a full invalidation on every deploy
+      # keeps returning visitors current without serving stale assets.
+      - name: Sync site to S3
+        run: |
+          aws s3 sync . s3://${{ vars.S3_BUCKET }}/ \
+            --delete \
+            --exclude ".git/*" \
+            --exclude ".github/*" \
+            --exclude "README.md" \
+            --exclude ".gitignore" \
+            --cache-control "public, max-age=300"
+
+      - name: Invalidate CloudFront
+        run: |
+          aws cloudfront create-invalidation \
+            --distribution-id ${{ vars.CLOUDFRONT_DISTRIBUTION_ID }} \
+            --paths '/*'

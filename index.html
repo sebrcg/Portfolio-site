@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="Sebastian, IT Support engineer building cloud and DevOps skills. AWS Solutions Architect Associate." />
+<title>Sebastian G · Cloud / DevOps Portfolio</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" />
+<link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+<div class="bg-stack"></div>
+<canvas id="nodes-canvas"></canvas>
+<div class="grid-overlay"></div>
+
+<div class="cursor-dot"></div>
+<div class="cursor-ring"></div>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a href="#top" class="brand" aria-label="Home">
+      <span class="brand-mark">s/</span>
+      <span>Sebastian G</span>
+      <span class="brand-dot" title="live"></span>
+    </a>
+
+    <nav class="nav" id="nav">
+      <a href="#about">About</a>
+      <a href="#stack">The Stack</a>
+      <a href="#lab">Lab Notes</a>
+      <a href="#region">Edge Map</a>
+    </nav>
+
+    <div class="nav-tools">
+      <button class="icon-btn" id="theme-toggle" title="Toggle theme" aria-label="Toggle theme">
+        <svg id="theme-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+        </svg>
+      </button>
+      <button class="icon-btn menu-toggle" id="menu-toggle" aria-label="Menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- HERO ============================================================ -->
+<section class="hero" id="hero">
+  <h1 class="hero-title reveal">
+    Building Cloud,<br/>
+    <span class="accent">hands on</span>
+  </h1>
+  <p class="hero-sub reveal">
+    IT Support engineer pivoting into <strong style="color:var(--text)">Cloud &amp; DevOps</strong>.
+    I learn by deploying the real thing, including this site, which is served
+    to you from an AWS edge right now.
+  </p>
+  <div class="hero-ctas reveal">
+    <a class="btn btn-primary" href="https://www.linkedin.com/in/sebastian-g-02361a3b8/" target="_blank" rel="noopener noreferrer">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM3.56 20.45h3.56V9H3.56v11.45z"/></svg>
+      Connect on LinkedIn
+    </a>
+    <a class="btn btn-ghost" href="https://github.com/sebrcg" target="_blank" rel="noopener noreferrer">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.9.58.1.79-.25.79-.56v-2.1c-3.2.69-3.87-1.36-3.87-1.36-.53-1.34-1.3-1.7-1.3-1.7-1.06-.73.08-.72.08-.72 1.17.08 1.78 1.2 1.78 1.2 1.04 1.79 2.73 1.27 3.4.97.1-.76.4-1.27.74-1.56-2.55-.29-5.24-1.28-5.24-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.47.11-3.06 0 0 .98-.31 3.2 1.19a11.1 11.1 0 0 1 5.83 0c2.22-1.5 3.2-1.19 3.2-1.19.63 1.59.23 2.77.11 3.06.74.81 1.19 1.84 1.19 3.1 0 4.43-2.69 5.4-5.25 5.69.41.36.78 1.06.78 2.13v3.16c0 .31.21.66.8.55C20.21 21.39 23.5 17.08 23.5 12 23.5 5.65 18.35.5 12 .5z"/></svg>
+      View GitHub
+    </a>
+    <a class="btn btn-ghost" href="mailto:seba@02f.pw">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+      seba@02f.pw
+    </a>
+  </div>
+
+  <div class="hero-status reveal" id="hero-status">
+    <span class="stat"><span class="live-dot"></span><strong>Live</strong></span>
+    <span class="divider"></span>
+    <span class="stat">edge → <strong id="stat-edge">resolving…</strong></span>
+    <span class="divider"></span>
+    <span class="stat">ttfb → <strong id="stat-ttfb">… ms</strong></span>
+    <span class="divider"></span>
+    <span class="stat">via <strong>CloudFront</strong></span>
+  </div>
+</section>
+
+<!-- ABOUT ============================================================ -->
+<section class="section" id="about">
+  <div class="eyebrow">01 · About</div>
+  <h2 class="section-title">From the help desk to <em style="font-style:normal;color:var(--accent-2)">production</em>.</h2>
+  <p class="section-lede">
+    I started in IT Support solving people's problems one ticket at a time.
+    Now I want to solve them at the infrastructure layer, the layer that
+    keeps tickets from being filed in the first place.
+  </p>
+
+  <div class="about-grid">
+    <div class="about-card reveal">
+      <h3>What I'm doing right now</h3>
+      <p>
+        Putting AWS Solutions Architect Associate into practice on small,
+        production style projects. This portfolio is one of them: a private S3
+        bucket behind CloudFront, an ACM issued cert, OAC instead of a public
+        bucket policy, DNS through Cloudflare. The whole stack is defined in
+        <strong style="color:var(--text)">Terraform</strong> and deployed by
+        <strong style="color:var(--text)">GitHub Actions over OIDC</strong>,
+        no long lived AWS keys anywhere.
+      </p>
+      <p>
+        Next up: <strong style="color:var(--text)">Linux on EC2 and CloudWatch
+        observability</strong> so I can own the whole pipeline end to end.
+      </p>
+    </div>
+
+    <div class="about-card reveal">
+      <h3>The journey</h3>
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-when">Before IT</div>
+          <div class="tl-what">CompTIA A+</div>
+          <div class="tl-detail">Formalised the fundamentals before stepping into the field. Picked up Linux on the side.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-when">IT job</div>
+          <div class="tl-what">Started in IT Support</div>
+          <div class="tl-detail">Help desk, hardware, Windows / macOS / network triage.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-when">May 2026</div>
+          <div class="tl-what">AWS Solutions Architect Associate</div>
+          <div class="tl-detail">VPC, IAM, S3, EC2, CloudFront, Route 53, DNS, top to bottom.</div>
+        </div>
+        <div class="tl-item current">
+          <div class="tl-when">Now</div>
+          <div class="tl-what">Pivoting into Cloud / DevOps</div>
+          <div class="tl-detail">Shipping this site end to end. Terraform infra, GitHub Actions OIDC deploy, bash + Python scripting.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STACK DIAGRAM ============================================================ -->
+<section class="section" id="stack">
+  <div class="eyebrow">02 · How this site works</div>
+  <h2 class="section-title">The page you're reading, traced live.</h2>
+  <p class="section-lede">
+    Click a node. Every box is something I configured by hand. The dotted
+    arrows are the path your browser took to reach this paragraph.
+  </p>
+
+  <div class="stack-wrap reveal">
+    <svg class="stack-diagram" viewBox="0 0 980 360" preserveAspectRatio="xMidYMid meet" aria-label="AWS architecture diagram">
+      <!-- wires -->
+      <path class="stack-wire" d="M 100 180 C 180 180, 200 180, 270 180" />
+      <path class="stack-wire" d="M 430 180 C 480 180, 480 180, 540 180" />
+      <path class="stack-wire" d="M 700 180 C 760 180, 760 180, 820 180" />
+      <path class="stack-wire" d="M 350 100 C 350 130, 350 130, 350 145" />
+      <path class="stack-wire" d="M 620 100 C 620 130, 620 130, 620 145" />
+
+      <!-- animated packet -->
+      <circle class="packet" r="5">
+        <animateMotion dur="6s" repeatCount="indefinite" path="M 100 180 C 180 180, 200 180, 270 180 L 430 180 C 480 180, 480 180, 540 180 L 700 180 C 760 180, 760 180, 820 180" />
+      </circle>
+
+      <!-- Browser -->
+      <g class="stack-node" data-id="browser">
+        <rect class="node-bg" x="20" y="140" width="80" height="80" rx="12"/>
+        <text class="node-label" x="60" y="178" text-anchor="middle">You</text>
+        <text class="node-sub" x="60" y="196" text-anchor="middle">browser</text>
+      </g>
+
+      <!-- Cloudflare DNS -->
+      <g class="stack-node" data-id="dns">
+        <rect class="node-bg" x="270" y="50" width="160" height="60" rx="12"/>
+        <text class="node-label" x="350" y="80" text-anchor="middle">Cloudflare DNS</text>
+        <text class="node-sub" x="350" y="98" text-anchor="middle">seba.sh → A record</text>
+      </g>
+
+      <!-- ACM -->
+      <g class="stack-node" data-id="acm">
+        <rect class="node-bg" x="540" y="50" width="160" height="60" rx="12"/>
+        <text class="node-label" x="620" y="80" text-anchor="middle">AWS ACM</text>
+        <text class="node-sub" x="620" y="98" text-anchor="middle">TLS cert</text>
+      </g>
+
+      <!-- CloudFront -->
+      <g class="stack-node active" data-id="cf">
+        <rect class="node-bg" x="270" y="145" width="160" height="80" rx="12"/>
+        <text class="node-label" x="350" y="180" text-anchor="middle">CloudFront</text>
+        <text class="node-sub" x="350" y="200" text-anchor="middle">edge cache</text>
+      </g>
+
+      <!-- OAC -->
+      <g class="stack-node" data-id="oac">
+        <rect class="node-bg" x="540" y="145" width="160" height="80" rx="12"/>
+        <text class="node-label" x="620" y="180" text-anchor="middle">Origin Access</text>
+        <text class="node-sub" x="620" y="200" text-anchor="middle">SigV4 → S3</text>
+      </g>
+
+      <!-- S3 -->
+      <g class="stack-node" data-id="s3">
+        <rect class="node-bg" x="820" y="140" width="140" height="90" rx="12"/>
+        <text class="node-label" x="890" y="180" text-anchor="middle">S3</text>
+        <text class="node-sub" x="890" y="198" text-anchor="middle">private bucket</text>
+        <text class="node-sub" x="890" y="214" text-anchor="middle">index.html</text>
+      </g>
+
+      <!-- labels for wires -->
+      <text class="node-sub" x="190" y="172" text-anchor="middle" fill="var(--muted)">HTTPS</text>
+      <text class="node-sub" x="485" y="172" text-anchor="middle" fill="var(--muted)">cache miss</text>
+      <text class="node-sub" x="760" y="172" text-anchor="middle" fill="var(--muted)">GET</text>
+    </svg>
+
+    <div class="stack-detail" id="stack-detail">
+      <h4>CloudFront <span class="tag">Edge</span></h4>
+      <p>Global CDN sitting in front of S3. Caches the site at AWS edge locations, terminates TLS using the ACM cert, and enforces HTTPS only. Without this layer, S3 would be slower, costlier, and exposed.</p>
+      <code class="cmd">aws cloudfront create-invalidation --distribution-id E... --paths "/*"</code>
+    </div>
+  </div>
+</section>
+
+<!-- LAB NOTES ============================================================ -->
+<section class="section" id="lab">
+  <div class="eyebrow">03 · Lab notes</div>
+  <h2 class="section-title">What I'm building &amp; writing about next.</h2>
+  <p class="section-lede">
+    A live look at the bench. Some of these are notebooks I'm cleaning up
+    into proper write ups. The rest are projects in flight.
+  </p>
+
+  <div class="lab-grid" id="lab-grid">
+    <article class="lab-card reveal">
+      <span class="lab-status live">● Live</span>
+      <h3>Shipping a static site the AWS way</h3>
+      <p>Walking through this very site: S3, CloudFront, OAC, ACM, Cloudflare DNS. Why each piece exists and the gotchas I hit.</p>
+      <div class="lab-meta">
+        <span>Repo · sebrcg/Portfolio-site</span>
+      </div>
+      <div class="lab-progress live"><span style="width:100%"></span></div>
+    </article>
+
+    <article class="lab-card reveal">
+      <span class="lab-status shipping">◐ Shipping soon</span>
+      <h3>Terraforming what I clicked together</h3>
+      <p>Re-deploying this same stack as Terraform modules. Goal: nuke the AWS console and have one <code>terraform apply</code> rebuild it from zero.</p>
+      <div class="lab-meta">
+        <span>Repo · sebrcg/Portfolio-tf</span>
+        <span>Jun 1</span>
+      </div>
+      <div class="lab-progress shipping"><span style="width:92%"></span></div>
+    </article>
+
+    <article class="lab-card reveal">
+      <span class="lab-status live">● Live</span>
+      <h3>GitHub Actions → S3, no long lived keys</h3>
+      <p>Wiring a deploy pipeline that uses OIDC instead of an IAM access key. CI assumes a role, syncs the bucket, invalidates CloudFront.</p>
+      <div class="lab-meta">
+        <span>Repo · sebrcg/Portfolio-site</span>
+      </div>
+      <div class="lab-progress live"><span style="width:100%"></span></div>
+    </article>
+
+    <article class="lab-card reveal">
+      <span class="lab-status queued">○ Queued</span>
+      <h3>Reading CloudWatch like a sysadmin</h3>
+      <p>What I'd actually look at when something breaks. Mapping the help desk troubleshooting muscle onto AWS observability.</p>
+      <div class="lab-progress"><span style="width:12%"></span></div>
+    </article>
+
+    <article class="lab-card reveal">
+      <span class="lab-status queued">○ Queued</span>
+      <h3>VPC by hand, the slow way</h3>
+      <p>Building a VPC, subnets, route tables, and a NAT gateway without copying a template. Aimed at folks who passed SAA-C03 and still feel fuzzy.</p>
+      <div class="lab-meta">
+        <span>Diagrams + lab</span>
+      </div>
+      <div class="lab-progress"><span style="width:8%"></span></div>
+    </article>
+
+    <article class="lab-card reveal">
+      <span class="lab-status drafting">● Drafting</span>
+      <h3>IT Support → Cloud: what carried over</h3>
+      <p>An honest list of the help desk skills that translate directly to infra work, and the gaps I had to fill. For other people making the same jump.</p>
+      <div class="lab-progress"><span style="width:55%"></span></div>
+    </article>
+  </div>
+</section>
+
+<!-- REGION MAP ============================================================ -->
+<section class="section" id="region">
+  <div class="eyebrow">04 · Edge map</div>
+  <h2 class="section-title">Where this page lives.</h2>
+  <p class="section-lede">
+    The site sits in S3 once and is replicated to ~600 CloudFront edges.
+    The green dot is the one currently serving you.
+  </p>
+
+  <div class="map-wrap reveal">
+    <div class="map-meta">
+      <div>Origin · <strong>S3 (us-east-1)</strong></div>
+      <div>Edge · <strong id="map-edge">resolving…</strong></div>
+      <div>Distance to origin · <strong id="map-dist">… mi</strong></div>
+    </div>
+    <svg id="region-map" viewBox="0 0 1000 480" preserveAspectRatio="xMidYMid meet" aria-label="AWS edge map"></svg>
+    <div class="map-tip" id="map-tip"></div>
+  </div>
+</section>
+
+<!-- CONTACT section removed; contacts live in hero -->
+
+</main>
+
+<footer>
+  <div>© 2026 Sebastian G · Built &amp; hosted by me.</div>
+  <div class="built-with">
+    <span>S3</span><span>CloudFront</span><span>ACM</span><span>OAC</span><span>Cloudflare DNS</span><span>Terraform</span><span>GitHub Actions</span><span>vanilla JS</span>
+  </div>
+  <div style="opacity:0.6">Try pressing <strong style="color:var(--accent-2)">↑ ↑ ↓ ↓ ← → ← → B A</strong> · or type <strong style="color:var(--accent-2)">sudo</strong></div>
+</footer>
+
+<!-- Tweaks toggle -->
+<button class="tweaks-toggle" id="tweaks-toggle" title="Tweaks" aria-label="Open tweaks">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="12" cy="12" r="3"/>
+    <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+  </svg>
+</button>
+
+<!-- Tweaks panel -->
+<div class="tweaks-panel" id="tweaks-panel" role="dialog" aria-label="Tweaks">
+  <h4>Tweaks</h4>
+  <div class="hint">// fork the vibe</div>
+
+  <div class="tweak-row">
+    <label class="tweak-label">Accent</label>
+    <div class="swatches" id="swatch-row"></div>
+  </div>
+
+  <div class="tweak-row">
+    <label class="tweak-label">Theme</label>
+    <div class="tweak-seg" id="theme-seg">
+      <button data-val="dark">Dark</button>
+      <button data-val="light">Light</button>
+    </div>
+  </div>
+
+  <div class="tweak-row">
+    <label class="tweak-label">Particle density · <span id="density-val">120</span></label>
+    <input type="range" class="tweak-slider" id="density" min="0" max="240" step="10" value="120" />
+  </div>
+
+  <div class="tweak-row">
+    <label class="tweak-label">Motion</label>
+    <div class="tweak-seg" id="motion-seg">
+      <button data-val="full">Full</button>
+      <button data-val="calm">Calm</button>
+    </div>
+  </div>
+</div>
+
+<!-- Easter egg overlay -->
+<div class="egg-overlay" id="egg-overlay">
+  <div class="egg-window">
+    <div class="egg-bar">
+      <i></i><i></i><i></i>
+      <span class="ttl">sebastian@seba ~ · permission granted</span>
+    </div>
+    <div class="egg-body" id="egg-body"></div>
+  </div>
+</div>
+
+<!-- Tweak defaults -->
+<script>
+window.__TWEAKS__ = /*EDITMODE-BEGIN*/{
+  "accent": "#f59e0b",
+  "theme": "dark",
+  "density": 240,
+  "motion": "full"
+}/*EDITMODE-END*/;
+</script>
+
+<script src="nodes.js" defer></script>
+<script src="diagram.js" defer></script>
+<script src="main.js" defer></script>
+</body>
+</html>
