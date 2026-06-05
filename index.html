@@ -31,6 +31,7 @@
 
     <nav class="nav" id="nav">
       <a href="#about">About</a>
+      <a href="#work">Work</a>
       <a href="#stack">The Stack</a>
       <a href="#lab">Lab Notes</a>
       <a href="#region">Edge Map</a>
@@ -146,9 +147,79 @@
   </div>
 </section>
 
+<!-- WORK HIGHLIGHTS ============================================================ -->
+<section class="section" id="work">
+  <div class="eyebrow">02 · Work highlights</div>
+  <h2 class="section-title">Automation I've shipped <em style="font-style:normal;color:var(--accent-2)">on the job</em>.</h2>
+  <p class="section-lede">
+    Internal tooling and process automation I built in production, the kind of
+    work that quietly removes manual steps and keeps systems consistent.
+  </p>
+
+  <div class="work-grid">
+    <article class="work-card reveal">
+      <div class="work-tag">Microsoft Copilot Studio · PowerShell</div>
+      <h3>Onboarding Automation</h3>
+      <p>
+        Led an onboarding automation initiative that extracts new hire data from
+        inconsistent TA submitted PDFs and standardizes it into PowerShell ready
+        output for account provisioning. Authored normalization rules for
+        department, allocation, primary email versus UPN, and access groups, then
+        redesigned the intake template so the pipeline could scale, cutting manual
+        interpretation and tightening the handoff between Talent Acquisition and IT
+        provisioning.
+      </p>
+    </article>
+
+    <article class="work-card reveal">
+      <div class="work-tag">RingCentral · Active Directory · Excel</div>
+      <h3>License Audit Framework</h3>
+      <p>
+        Built a reusable SaaS license audit framework that integrates three data
+        sources (RingCentral Admin Portal, RC Analytics, and Active Directory) into
+        a categorized Excel report, establishing a repeatable monthly workflow for
+        license governance. By auditing RingCentral licenses against Active Directory
+        account status, it sorts users into Reclaim, Review, Monitor, and Active
+        tiers, giving leadership data driven allocation decisions backed by clear
+        recommendations. The first run flagged <span class="metric">200+ accounts</span>
+        for reclamation across a <span class="metric">1000+ user</span> environment.
+      </p>
+    </article>
+
+    <article class="work-card reveal">
+      <div class="work-tag">Atera · PowerShell</div>
+      <h3>ImageRight Repair Automation</h3>
+      <p>
+        Replaced a manual ImageRight repair process with an Atera delivered
+        PowerShell uninstaller that strips every package component, resolves file
+        lock conflicts, and clears a clean path for reinstall. The result is a
+        faster, more reliable fix that cuts troubleshooting time for end users and
+        removes the guesswork from a recurring support task.
+      </p>
+    </article>
+
+    <article class="work-card reveal">
+      <div class="work-tag">PowerShell · RMM</div>
+      <h3>Splashtop Reliability Tooling</h3>
+      <p>
+        Built a pair of PowerShell tools to harden Splashtop across managed Windows
+        endpoints. The first standardizes audio behavior by adjusting registry keys
+        and restarting services in a controlled sequence. The second is a health
+        check that diagnoses remote access failures end to end, validating Atera
+        Agent status, Splashtop service health, installation footprint, DNS
+        resolution, and TCP 443 connectivity, with structured logging, defensive
+        error handling, and meaningful exit codes so it plugs straight into RMM and
+        automation workflows. Together they cut manual troubleshooting time and
+        brought consistency to resolving "unable to connect" and remote session
+        issues across the fleet.
+      </p>
+    </article>
+  </div>
+</section>
+
 <!-- STACK DIAGRAM ============================================================ -->
 <section class="section" id="stack">
-  <div class="eyebrow">02 · How this site works</div>
+  <div class="eyebrow">03 · How this site works</div>
   <h2 class="section-title">The page you're reading, traced live.</h2>
   <p class="section-lede">
     Click a node. Every box is something I configured by hand. The dotted
@@ -228,7 +299,7 @@
 
 <!-- LAB NOTES ============================================================ -->
 <section class="section" id="lab">
-  <div class="eyebrow">03 · Lab notes</div>
+  <div class="eyebrow">04 · Lab notes</div>
   <h2 class="section-title">What I'm building &amp; writing about next.</h2>
   <p class="section-lede">
     A live look at the bench. Some of these are notebooks I'm cleaning up
@@ -295,7 +366,7 @@
 
 <!-- REGION MAP ============================================================ -->
 <section class="section" id="region">
-  <div class="eyebrow">04 · Edge map</div>
+  <div class="eyebrow">05 · Edge map</div>
   <h2 class="section-title">Where this page lives.</h2>
   <p class="section-lede">
     The site sits in S3 once and is replicated to ~600 CloudFront edges.
