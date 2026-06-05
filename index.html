@@ -32,8 +32,8 @@
     <nav class="nav" id="nav">
       <a href="#about">About</a>
       <a href="#work">Work</a>
-      <a href="#stack">The Stack</a>
       <a href="#lab">Lab Notes</a>
+      <a href="#stack">The Stack</a>
       <a href="#region">Edge Map</a>
     </nav>
 
@@ -217,9 +217,76 @@
   </div>
 </section>
 
+<!-- LAB NOTES ============================================================ -->
+<section class="section" id="lab">
+  <div class="eyebrow">03 · Lab notes</div>
+  <h2 class="section-title">What I'm building &amp; writing about next.</h2>
+  <p class="section-lede">
+    A live look at the bench. Some of these are notebooks I'm cleaning up
+    into proper write ups. The rest are projects in flight.
+  </p>
+
+  <div class="lab-grid" id="lab-grid">
+    <article class="lab-card reveal">
+      <span class="lab-status live">● Live</span>
+      <h3>Shipping a static site the AWS way</h3>
+      <p>Walking through this very site: S3, CloudFront, OAC, ACM, Cloudflare DNS. Why each piece exists and the gotchas I hit.</p>
+      <div class="lab-meta">
+        <span>Repo · sebrcg/Portfolio-site</span>
+      </div>
+      <div class="lab-progress live"><span style="width:100%"></span></div>
+    </article>
+
+    <article class="lab-card reveal">
+      <span class="lab-status live">● Live</span>
+      <h3>Terraforming what I clicked together</h3>
+      <p>Re-deploying this same stack as Terraform modules. Goal: nuke the AWS console and have one <code>terraform apply</code> rebuild it from zero.</p>
+      <div class="lab-meta">
+        <span>Repo · sebrcg/Portfolio-tf</span>
+        <span>Jun 1</span>
+      </div>
+      <div class="lab-progress live"><span style="width:100%"></span></div>
+    </article>
+
+    <article class="lab-card reveal">
+      <span class="lab-status live">● Live</span>
+      <h3>GitHub Actions → S3, no long lived keys</h3>
+      <p>Wiring a deploy pipeline that uses OIDC instead of an IAM access key. CI assumes a role, syncs the bucket, invalidates CloudFront.</p>
+      <div class="lab-meta">
+        <span>Repo · sebrcg/Portfolio-site</span>
+      </div>
+      <div class="lab-progress live"><span style="width:100%"></span></div>
+    </article>
+
+    <article class="lab-card reveal">
+      <span class="lab-status live">● Live</span>
+      <h3>The same server, built two ways</h3>
+      <p>A containerized game server deployed to AWS ECS Fargate, defined entirely as code: private network, container registry, and serverless compute. I built the same architecture twice, once in Terraform and once in Pulumi/Python, to gain exposure to various tools. Rounded out with versioned remote state in S3 and a CI pipeline that previews every change before it ships.</p>
+      <div class="lab-meta">
+        <span>Terraform + Pulumi</span>
+      </div>
+      <div class="lab-progress live"><span style="width:100%"></span></div>
+    </article>
+
+    <article class="lab-card reveal">
+      <span class="lab-status queued">○ Queued</span>
+      <h3>Reading CloudWatch like a sysadmin</h3>
+      <p>What I'd actually look at when something breaks. Mapping the help desk troubleshooting muscle onto AWS observability.</p>
+      <div class="lab-progress"><span style="width:12%"></span></div>
+    </article>
+
+    <article class="lab-card reveal">
+      <span class="lab-status drafting">● Drafting</span>
+      <h3>IT Support → Cloud: what carried over</h3>
+      <p>An honest list of the help desk skills that translate directly to infra work, and the gaps I had to fill. For other people making the same jump.</p>
+      <div class="lab-progress"><span style="width:55%"></span></div>
+    </article>
+  </div>
+</section>
+
 <!-- STACK DIAGRAM ============================================================ -->
 <section class="section" id="stack">
-  <div class="eyebrow">03 · How this site works</div>
+  <div class="eyebrow">04 · How this site works</div>
   <h2 class="section-title">The page you're reading, traced live.</h2>
   <p class="section-lede">
     Click a node. Every box is something I configured by hand. The dotted
@@ -294,73 +361,6 @@
       <p>Global CDN sitting in front of S3. Caches the site at AWS edge locations, terminates TLS using the ACM cert, and enforces HTTPS only. Without this layer, S3 would be slower, costlier, and exposed.</p>
       <code class="cmd">aws cloudfront create-invalidation --distribution-id E... --paths "/*"</code>
     </div>
-  </div>
-</section>
-
-<!-- LAB NOTES ============================================================ -->
-<section class="section" id="lab">
-  <div class="eyebrow">04 · Lab notes</div>
-  <h2 class="section-title">What I'm building &amp; writing about next.</h2>
-  <p class="section-lede">
-    A live look at the bench. Some of these are notebooks I'm cleaning up
-    into proper write ups. The rest are projects in flight.
-  </p>
-
-  <div class="lab-grid" id="lab-grid">
-    <article class="lab-card reveal">
-      <span class="lab-status live">● Live</span>
-      <h3>Shipping a static site the AWS way</h3>
-      <p>Walking through this very site: S3, CloudFront, OAC, ACM, Cloudflare DNS. Why each piece exists and the gotchas I hit.</p>
-      <div class="lab-meta">
-        <span>Repo · sebrcg/Portfolio-site</span>
-      </div>
-      <div class="lab-progress live"><span style="width:100%"></span></div>
-    </article>
-
-    <article class="lab-card reveal">
-      <span class="lab-status live">● Live</span>
-      <h3>Terraforming what I clicked together</h3>
-      <p>Re-deploying this same stack as Terraform modules. Goal: nuke the AWS console and have one <code>terraform apply</code> rebuild it from zero.</p>
-      <div class="lab-meta">
-        <span>Repo · sebrcg/Portfolio-tf</span>
-        <span>Jun 1</span>
-      </div>
-      <div class="lab-progress live"><span style="width:100%"></span></div>
-    </article>
-
-    <article class="lab-card reveal">
-      <span class="lab-status live">● Live</span>
-      <h3>GitHub Actions → S3, no long lived keys</h3>
-      <p>Wiring a deploy pipeline that uses OIDC instead of an IAM access key. CI assumes a role, syncs the bucket, invalidates CloudFront.</p>
-      <div class="lab-meta">
-        <span>Repo · sebrcg/Portfolio-site</span>
-      </div>
-      <div class="lab-progress live"><span style="width:100%"></span></div>
-    </article>
-
-    <article class="lab-card reveal">
-      <span class="lab-status live">● Live</span>
-      <h3>The same server, built two ways</h3>
-      <p>A containerized game server deployed to AWS ECS Fargate, defined entirely as code: private network, container registry, and serverless compute. I built the same architecture twice, once in Terraform and once in Pulumi/Python, to gain exposure to various tools. Rounded out with versioned remote state in S3 and a CI pipeline that previews every change before it ships.</p>
-      <div class="lab-meta">
-        <span>Terraform + Pulumi</span>
-      </div>
-      <div class="lab-progress live"><span style="width:100%"></span></div>
-    </article>
-
-    <article class="lab-card reveal">
-      <span class="lab-status queued">○ Queued</span>
-      <h3>Reading CloudWatch like a sysadmin</h3>
-      <p>What I'd actually look at when something breaks. Mapping the help desk troubleshooting muscle onto AWS observability.</p>
-      <div class="lab-progress"><span style="width:12%"></span></div>
-    </article>
-
-    <article class="lab-card reveal">
-      <span class="lab-status drafting">● Drafting</span>
-      <h3>IT Support → Cloud: what carried over</h3>
-      <p>An honest list of the help desk skills that translate directly to infra work, and the gaps I had to fill. For other people making the same jump.</p>
-      <div class="lab-progress"><span style="width:55%"></span></div>
-    </article>
   </div>
 </section>
 
