@@ -62,8 +62,8 @@
   </h1>
   <p class="hero-sub reveal">
     IT Support engineer pivoting into <strong style="color:var(--text)">Cloud &amp; DevOps</strong>.
-    I learn by deploying the real thing, including this site, which is served
-    to you from an AWS edge right now.
+    I learn by shipping the real thing, like this site, served to you from an
+    AWS edge right now.
   </p>
   <div class="hero-ctas reveal">
     <a class="btn btn-primary" href="https://www.linkedin.com/in/sebastian-g-02361a3b8/" target="_blank" rel="noopener noreferrer">
@@ -96,26 +96,24 @@
   <div class="eyebrow">01 · About</div>
   <h2 class="section-title">From the help desk to <em style="font-style:normal;color:var(--accent-2)">production</em>.</h2>
   <p class="section-lede">
-    I started in IT Support solving people's problems one ticket at a time.
-    Now I want to solve them at the infrastructure layer, the layer that
-    keeps tickets from being filed in the first place.
+    I started in IT Support, fixing problems one ticket at a time. Now I want
+    to fix them at the infrastructure layer, before the ticket gets filed.
   </p>
 
   <div class="about-grid">
     <div class="about-card reveal">
       <h3>What I'm doing right now</h3>
       <p>
-        Putting AWS Solutions Architect Associate into practice on small,
-        production style projects. This portfolio is one of them: a private S3
-        bucket behind CloudFront, an ACM issued cert, OAC instead of a public
-        bucket policy, DNS through Cloudflare. The whole stack is defined in
-        <strong style="color:var(--text)">Terraform</strong> and deployed by
+        Putting AWS Solutions Architect Associate to work on real projects.
+        This site is one: a private S3 bucket behind CloudFront, an ACM cert,
+        OAC instead of a public bucket, DNS on Cloudflare. The whole stack is
+        <strong style="color:var(--text)">Terraform</strong>, deployed by
         <strong style="color:var(--text)">GitHub Actions over OIDC</strong>,
-        no long lived AWS keys anywhere.
+        no long lived keys anywhere.
       </p>
       <p>
-        Next up: <strong style="color:var(--text)">Linux on EC2 and CloudWatch
-        observability</strong> so I can own the whole pipeline end to end.
+        Next: <strong style="color:var(--text)">Linux on EC2 and CloudWatch</strong>,
+        so I own the pipeline end to end.
       </p>
     </div>
 
@@ -149,7 +147,7 @@
 
 <!-- WORK HIGHLIGHTS ============================================================ -->
 <section class="section" id="work">
-  <div class="eyebrow">02 · Work highlights</div>
+  <div class="eyebrow">02 · On the job</div>
   <h2 class="section-title">Work Highlights</h2>
 
   <div class="work-grid">
@@ -201,14 +199,14 @@
 
 <!-- LAB NOTES ============================================================ -->
 <section class="section" id="lab">
-  <div class="eyebrow">03 · Lab notes</div>
+  <div class="eyebrow">03 · The bench</div>
   <h2 class="section-title">Lab Notes</h2>
 
   <div class="lab-grid" id="lab-grid">
     <article class="lab-card reveal">
       <span class="lab-status live">● Live</span>
       <h3>Shipping a static site the AWS way</h3>
-      <p>This very site on S3, CloudFront, OAC, ACM, and Cloudflare DNS.</p>
+      <p>The first build, wired up by hand in the AWS console: S3, CloudFront, OAC, ACM, and Cloudflare DNS.</p>
       <div class="lab-meta">
         <span>Repo · sebrcg/Portfolio-site</span>
       </div>
@@ -267,8 +265,8 @@
   <div class="eyebrow">04 · How this site works</div>
   <h2 class="section-title">The page you're reading, traced live.</h2>
   <p class="section-lede">
-    Click a node. Every box is something I configured by hand. The dotted
-    arrows are the path your browser took to reach this paragraph.
+    Click any node. Each box is provisioned by Terraform. The dotted line is
+    the path your browser took to reach this paragraph.
   </p>
 
   <div class="stack-wrap reveal">
@@ -347,8 +345,8 @@
   <div class="eyebrow">05 · Edge map</div>
   <h2 class="section-title">Where this page lives.</h2>
   <p class="section-lede">
-    The site sits in S3 once and is replicated to ~600 CloudFront edges.
-    The green dot is the one currently serving you.
+    Stored in S3 once, cached to ~600 CloudFront edges. The green dot is the
+    one serving you.
   </p>
 
   <div class="map-wrap reveal">
@@ -401,8 +399,8 @@
   </div>
 
   <div class="tweak-row">
-    <label class="tweak-label">Particle density · <span id="density-val">120</span></label>
-    <input type="range" class="tweak-slider" id="density" min="0" max="240" step="10" value="120" />
+    <label class="tweak-label">Particle density · <span id="density-val">70</span></label>
+    <input type="range" class="tweak-slider" id="density" min="0" max="240" step="10" value="70" />
   </div>
 
   <div class="tweak-row">
@@ -430,7 +428,7 @@
 window.__TWEAKS__ = /*EDITMODE-BEGIN*/{
   "accent": "#f59e0b",
   "theme": "dark",
-  "density": 240,
+  "density": 70,
   "motion": "full"
 }/*EDITMODE-END*/;
 </script>

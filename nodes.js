@@ -11,7 +11,16 @@
   let DPR = Math.min(2, window.devicePixelRatio || 1);
   let W = 0, H = 0;
   let particles = [];
-  let count = 120;
+  let count = 70;
+
+  // Particle count is a desired ceiling; small screens get a fraction of it so
+  // phones aren't buried under a dense web (and the O(n^2) link pass stays cheap).
+  function effectiveCount() {
+    const w = window.innerWidth;
+    if (w < 700) return Math.round(count * 0.42);   // phones
+    if (w < 1100) return Math.round(count * 0.7);   // tablets / small laptops
+    return count;
+  }
   let motion = 'full'; // 'full' | 'calm'
   let accent = '#4f8cff';
   let mouse = { x: -9999, y: -9999, active: false };
@@ -34,7 +43,8 @@
 
   function seed() {
     particles = [];
-    for (let i = 0; i < count; i++) {
+    const n = effectiveCount();
+    for (let i = 0; i < n; i++) {
       const layer = Math.random();
       particles.push({
         x: Math.random() * W,

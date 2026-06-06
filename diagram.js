@@ -21,7 +21,7 @@
     acm: {
       title: 'AWS Certificate Manager',
       tag: 'TLS',
-      body: "ACM issued the wildcard TLS cert (DNS-validated). CloudFront uses it to terminate HTTPS at the edge so S3 never has to speak TLS.",
+      body: "ACM issued the TLS cert for seba.sh and www.seba.sh (DNS-validated). CloudFront uses it to terminate HTTPS at the edge so S3 never has to speak TLS.",
       cmd: 'aws acm describe-certificate --certificate-arn arn:aws:acm:...',
     },
     cf: {
@@ -34,13 +34,13 @@
       title: 'Origin Access Control',
       tag: 'Auth',
       body: "Newer replacement for OAI. CloudFront signs requests to S3 with SigV4, so the bucket can stay 100% private. Only this distribution can read it: direct s3.amazonaws.com URLs return 403.",
-      cmd: 'aws s3api get-bucket-policy --bucket seba-portfolio',
+      cmd: 'aws s3api get-bucket-policy --bucket seba-sh-site',
     },
     s3: {
       title: 'Amazon S3',
       tag: 'Origin',
-      body: "The actual files. Private bucket, public-block ON, versioning ON. Deploy is a tiny script: aws s3 sync + a CloudFront invalidation.",
-      cmd: 'aws s3 sync ./dist s3://seba-portfolio --delete',
+      body: "The actual files. Private bucket, public-block ON, versioning ON. Deploy runs in CI: GitHub Actions assumes a role via OIDC, runs aws s3 sync, then invalidates CloudFront.",
+      cmd: 'aws s3 sync ./dist s3://seba-sh-site --delete',
     },
   };
 
