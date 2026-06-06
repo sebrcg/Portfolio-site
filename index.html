@@ -152,69 +152,53 @@
   <div class="eyebrow">02 · Work highlights</div>
   <h2 class="section-title">Automation I've shipped <em style="font-style:normal;color:var(--accent-2)">on the job</em>.</h2>
   <p class="section-lede">
-    Internal tooling and process automation I built in production, the kind of
-    work that quietly removes manual steps and keeps systems consistent.
+    Internal tooling and automation I built in production, the kind of work that
+    quietly removes manual steps and keeps systems consistent.
   </p>
 
   <div class="work-grid">
     <article class="work-card reveal">
-      <div class="work-tag">Microsoft Copilot Studio · Teams · PowerShell</div>
+      <div class="work-tag">Copilot Studio · Teams · PowerShell</div>
       <h3>Onboarding Automation</h3>
-      <p>
-        Led an onboarding automation initiative that extracts new hire data from
-        submitted PDFs and standardizes it into PowerShell ready
-        output for account provisioning. Authored normalization rules for
-        department, allocation, primary email versus UPN, and access groups, then
-        redesigned the intake template so the pipeline could scale, cutting manual
-        interpretation and tightening the handoff between Talent Acquisition and IT
-        provisioning. To put it in reach of the whole team, I packaged the
-        automation as a Copilot agent that lives in Microsoft Teams, so anyone can
-        run a submission straight from chat instead of touching the pipeline directly.
-      </p>
+      <p class="work-lead">Turned manual new-hire setup into a one-click pipeline.</p>
+      <ul class="work-points">
+        <li>Reads new-hire PDFs and outputs provisioning-ready PowerShell</li>
+        <li>Self-service Copilot agent in Teams, run it straight from chat</li>
+        <li>Cut manual data entry and tightened the TA-to-IT handoff</li>
+      </ul>
     </article>
 
     <article class="work-card reveal">
       <div class="work-tag">RingCentral · Active Directory · Excel</div>
       <h3>License Audit Framework</h3>
-      <p>
-        Built a reusable SaaS license audit framework that integrates three data
-        sources (RingCentral Admin Portal, RC Analytics, and Active Directory) into
-        a categorized Excel report, establishing a repeatable monthly workflow for
-        license governance. By auditing RingCentral licenses against Active Directory
-        account status, it sorts users into Reclaim, Review, Monitor, and Active
-        tiers, giving leadership data driven allocation decisions backed by clear
-        recommendations. The first run flagged <span class="metric">200+ accounts</span>
-        for reclamation across a <span class="metric">1000+ user</span> environment.
-      </p>
+      <p class="work-lead">A monthly license audit that pays for itself.</p>
+      <ul class="work-points">
+        <li>Flagged <span class="metric">200+</span> reclaimable accounts across a <span class="metric">1,000+</span> user environment</li>
+        <li>Sorts every user into Reclaim / Review / Monitor / Active tiers</li>
+        <li>Gives leadership data-driven cuts instead of guesswork</li>
+      </ul>
     </article>
 
     <article class="work-card reveal">
       <div class="work-tag">Atera · PowerShell</div>
       <h3>ImageRight Repair Automation</h3>
-      <p>
-        Replaced a manual ImageRight repair process with an Atera delivered
-        PowerShell uninstaller that strips every package component, resolves file
-        lock conflicts, and clears a clean path for reinstall. The result is a
-        faster, more reliable fix that cuts troubleshooting time for end users and
-        removes the guesswork from a recurring support task.
-      </p>
+      <p class="work-lead">One-click repair for a fix that used to be all manual.</p>
+      <ul class="work-points">
+        <li>Clears every component and file lock, then reinstalls clean</li>
+        <li>Pushed through Atera, no desk visit required</li>
+        <li>Cut troubleshooting time on a recurring support ticket</li>
+      </ul>
     </article>
 
     <article class="work-card reveal">
       <div class="work-tag">PowerShell · RMM</div>
       <h3>Splashtop Reliability Tooling</h3>
-      <p>
-        Built a pair of PowerShell tools to harden Splashtop across managed Windows
-        endpoints. The first standardizes audio behavior by adjusting registry keys
-        and restarting services in a controlled sequence. The second is a health
-        check that diagnoses remote access failures end to end, validating Atera
-        Agent status, Splashtop service health, installation footprint, DNS
-        resolution, and TCP 443 connectivity, with structured logging, defensive
-        error handling, and meaningful exit codes so it plugs straight into RMM and
-        automation workflows. Together they cut manual troubleshooting time and
-        brought consistency to resolving "unable to connect" and remote session
-        issues across the fleet.
-      </p>
+      <p class="work-lead">Two tools that keep remote access working.</p>
+      <ul class="work-points">
+        <li>Health check diagnoses "can't connect" end to end: agent, service, DNS, port 443</li>
+        <li>Standardizes audio config across every managed endpoint</li>
+        <li>Plugs into RMM with clean logging and exit codes</li>
+      </ul>
     </article>
   </div>
 </section>
