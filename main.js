@@ -39,7 +39,7 @@
     const rand = () => GLYPHS[(Math.random() * GLYPHS.length) | 0];
     // Each line resolves over the SAME total time, so a short line and a
     // long line finish together (the long line just reveals faster).
-    const DURATION = 1250; // ms for a line to fully resolve
+    const DURATION = 950; // ms for a line to fully resolve
     const START = 300;     // ms hold on the scrambled text before resolving
 
     function crack(el, duration) {
