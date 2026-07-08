@@ -163,6 +163,33 @@
     setTimeout(() => items.forEach(run), 3000);
   })();
 
+  /* ---------- Contact rollout (click to reveal contact links) ---------- */
+  (function contactRollout() {
+    const root = $('#contact-rollout');
+    const trigger = $('#contact-trigger');
+    if (!root || !trigger) return;
+    const pills = $$('.contact-pill', root);
+
+    function setOpen(open) {
+      root.classList.toggle('open', open);
+      trigger.setAttribute('aria-expanded', open ? 'true' : 'false');
+      // keep hidden links out of the tab order while collapsed
+      pills.forEach(p => { p.tabIndex = open ? 0 : -1; });
+    }
+    setOpen(false); // start collapsed
+
+    trigger.addEventListener('click', (e) => {
+      e.stopPropagation();
+      setOpen(!root.classList.contains('open'));
+    });
+    document.addEventListener('click', (e) => {
+      if (root.classList.contains('open') && !root.contains(e.target)) setOpen(false);
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && root.classList.contains('open')) setOpen(false);
+    });
+  })();
+
   /* ---------- Active section in nav (scroll-driven) ---------- */
   const sections = $$('section[id]');
   const navLinks = $$('.nav a');
