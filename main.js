@@ -131,7 +131,7 @@
 
     items.forEach(it => { it.el.textContent = fmt(0, it.pre, it.suf); });
 
-    const DURATION = 1200;
+    const DURATION = 3600;
     const easeOut = t => 1 - Math.pow(1 - t, 3);
 
     function run(it) {
