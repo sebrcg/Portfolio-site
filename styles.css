@@ -352,17 +352,32 @@ h1.hero-title {
 }
 @keyframes blink { 50% { opacity: 0; } }
 
-/* one-time "hash crack" scramble on load */
+/* one-time morphing text reveal on load (21st.dev-style) */
 .hero-title .cracking {
-  animation: crackGlow 0.22s steps(2, end) infinite;
-  will-change: filter;
+  font-family: var(--font-mono);
+  letter-spacing: 0.04em;
 }
-@keyframes crackGlow {
-  0%, 100% { filter: none; }
-  50% { filter: drop-shadow(0 0 5px var(--accent-glow)); }
+.hero-title .crk-char {
+  display: inline-block;
+  will-change: transform, opacity;
+}
+.hero-title .crk-char.scrambling { opacity: 0.5; }
+/* accent chars: the parent gradient span paints them transparent, so
+   give each glyph a solid fill while it's animating */
+.hero-title .accent .crk-char {
+  color: var(--accent-2);
+  -webkit-text-fill-color: var(--accent-2);
+}
+.hero-title .crk-char.pop {
+  animation: morphChar 0.4s cubic-bezier(0.2, 0.75, 0.2, 1) both;
+}
+@keyframes morphChar {
+  0%   { opacity: 0; transform: translateY(0.4em) scale(0.82); }
+  55%  { opacity: 1; transform: translateY(-0.1em) scale(1.12); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
 }
 @media (prefers-reduced-motion: reduce) {
-  .hero-title .cracking { animation: none; filter: none; }
+  .hero-title .crk-char.pop { animation: none; }
 }
 
 .hero-sub {

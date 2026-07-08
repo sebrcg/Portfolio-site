@@ -25,55 +25,78 @@
   // Safety net: after 1.2s, force-reveal anything still hidden
   setTimeout(() => revealNodes.forEach(el => el.classList.add('in')), 1200);
 
-  /* ---------- Hero title: one-time "hash crack" scramble ----------
-     Resolves each line left-to-right like a brute-forced hash, then
-     settles exactly on the real text. Runs once, never loops. Both
-     lines scramble immediately; the top line starts resolving first.
-     Skipped for reduced-motion / Calm so the copy just shows plain. */
-  (function heroCrack() {
+  /* ---------- Hero title: one-time morphing text reveal ----------
+     Ported from the 21st.dev "morphing text reveal": every character
+     flickers through random glyphs, then pops into place (rise + scale)
+     in a left-to-right wave, in monospace, before the title settles on
+     its real font + gradient. Both lines share a reveal window so they
+     finish together. Runs once, never loops. Skipped for
+     reduced-motion / Calm so the copy just shows plain. */
+  (function heroReveal() {
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const calm = window.__TWEAKS__ && window.__TWEAKS__.motion === 'calm';
     if (reduce || calm) return; // leave the real words in place
 
     const GLYPHS = '0123456789abcdef/\\<>*#';
     const rand = () => GLYPHS[(Math.random() * GLYPHS.length) | 0];
-    // Each line resolves over the SAME total time, so a short line and a
-    // long line finish together (the long line just reveals faster).
-    const DURATION = 950; // ms for a line to fully resolve
-    const START = 300;     // ms hold on the scrambled text before resolving
+    const SPAN = 750;  // reveal window per line — both lines share it, so a
+                       // short line reveals slower and they finish together
+    const START = 160; // ms hold on the scrambled text before revealing
+    const POP = 400;   // per-character pop duration (matches morphChar in CSS)
 
-    function crack(el, duration) {
+    function reveal(el) {
       if (!el) return;
       const finalText = (el.textContent || '').trim();
       if (!finalText) return;
       const chars = finalText.split('');
-      // real chars up to `locked`, random glyphs after (spaces kept)
-      const frame = (locked) => chars
-        .map((c, i) => (i < locked ? c : (c === ' ' ? ' ' : rand())))
-        .join('');
 
-      let start = 0;
       el.classList.add('cracking');
-      el.textContent = frame(0); // scramble instantly, hold until START
+      el.textContent = '';
+      const spans = chars.map((ch) => {
+        const s = document.createElement('span');
+        s.className = 'crk-char' + (ch === ' ' ? '' : ' scrambling');
+        s.textContent = ch === ' ' ? ' ' : rand();
+        el.appendChild(s);
+        return s;
+      });
+
+      const stagger = SPAN / Math.max(1, chars.length);
+      const revealed = new Array(chars.length).fill(false);
+      let start = 0;
 
       function tick(now) {
         if (!start) start = now;
-        const p = Math.min(1, (now - start) / duration); // 0 → 1 progress
-        const locked = Math.floor(p * chars.length);
-        el.textContent = frame(locked); // flicker unlocked chars each frame
-        if (p < 1) {
+        const t = now - start;
+        let pending = false;
+        for (let i = 0; i < chars.length; i++) {
+          if (revealed[i]) continue;
+          if (chars[i] === ' ') { revealed[i] = true; continue; }
+          if (t >= i * stagger) {
+            revealed[i] = true;                 // lock this char in
+            spans[i].textContent = chars[i];
+            spans[i].classList.remove('scrambling');
+            spans[i].classList.add('pop');      // rise + scale into place
+          } else {
+            pending = true;
+            spans[i].textContent = rand();      // keep flickering
+          }
+        }
+        if (pending) {
           requestAnimationFrame(tick);
         } else {
-          el.textContent = finalText; // settle exactly on the real text
-          el.classList.remove('cracking');
+          // let the last pops finish, then restore the real markup so the
+          // settled title regains its font + gradient
+          setTimeout(() => {
+            el.textContent = finalText;
+            el.classList.remove('cracking');
+          }, POP);
         }
       }
       setTimeout(() => requestAnimationFrame(tick), START);
     }
 
-    // both lines start and finish together
-    crack($('.hero-title .hero-l1'), DURATION);
-    crack($('.hero-title .accent'), DURATION);
+    reveal($('.hero-title .hero-l1'));
+    reveal($('.hero-title .accent'));
   })();
 
   /* ---------- Active section in nav (scroll-driven) ---------- */
