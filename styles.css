@@ -336,10 +336,7 @@ h1.hero-title {
   text-wrap: balance;
 }
 .hero-title .accent {
-  background: linear-gradient(135deg, var(--accent-2), #b692ff 80%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  color: var(--accent-2);
   position: relative;
 }
 .hero-title .accent::after {
