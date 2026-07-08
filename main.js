@@ -188,6 +188,27 @@
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && root.classList.contains('open')) setOpen(false);
     });
+
+    // magnetic pull: each pill eases toward the cursor while hovered, then
+    // springs back on exit. Desktop-only, and off for reduced-motion.
+    const fine = window.matchMedia('(pointer: fine)').matches;
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (fine && !reduce) {
+      pills.forEach(pill => {
+        pill.addEventListener('pointerenter', () => { pill.style.transition = 'none'; });
+        pill.addEventListener('pointermove', (e) => {
+          const r = pill.getBoundingClientRect();
+          const x = (e.clientX - (r.left + r.width / 2)) * 0.3;
+          const y = (e.clientY - (r.top + r.height / 2)) * 0.5;
+          pill.style.transform = `translate(${x}px, ${y}px)`;
+        });
+        pill.addEventListener('pointerleave', () => {
+          pill.style.transition = 'transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1)';
+          pill.style.transform = '';
+          setTimeout(() => { pill.style.transition = ''; }, 380);
+        });
+      });
+    }
   })();
 
   /* ---------- Active section in nav (scroll-driven) ---------- */
