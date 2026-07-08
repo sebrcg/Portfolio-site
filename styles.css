@@ -352,11 +352,8 @@ h1.hero-title {
 }
 @keyframes blink { 50% { opacity: 0; } }
 
-/* one-time morphing text reveal on load (21st.dev-style) */
-.hero-title .cracking {
-  font-family: var(--font-mono);
-  letter-spacing: 0.04em;
-}
+/* one-time morphing text reveal on load (21st.dev-style) — keeps the
+   title's own font throughout, no monospace swap */
 .hero-title .crk-char {
   display: inline-block;
   will-change: transform, opacity;
