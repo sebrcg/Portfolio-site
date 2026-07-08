@@ -37,9 +37,12 @@
 
     const GLYPHS = '0123456789abcdef/\\<>*#';
     const rand = () => GLYPHS[(Math.random() * GLYPHS.length) | 0];
-    const STEP = 230; // ms between each character locking (higher = slower)
+    // Each line resolves over the SAME total time, so a short line and a
+    // long line finish together (the long line just reveals faster).
+    const DURATION = 3400; // ms for a line to fully resolve
+    const START = 300;     // ms hold on the scrambled text before resolving
 
-    function crack(el, startDelay) {
+    function crack(el, duration) {
       if (!el) return;
       const finalText = (el.textContent || '').trim();
       if (!finalText) return;
@@ -49,31 +52,28 @@
         .map((c, i) => (i < locked ? c : (c === ' ' ? ' ' : rand())))
         .join('');
 
-      let locked = 0, last = 0;
+      let start = 0;
       el.classList.add('cracking');
-      el.textContent = frame(0); // scramble instantly, hold until startDelay
+      el.textContent = frame(0); // scramble instantly, hold until START
 
       function tick(now) {
-        if (!last) last = now;
+        if (!start) start = now;
+        const p = Math.min(1, (now - start) / duration); // 0 → 1 progress
+        const locked = Math.floor(p * chars.length);
         el.textContent = frame(locked); // flicker unlocked chars each frame
-        if (now - last >= STEP) {
-          last = now;
-          locked++;
-          while (chars[locked] === ' ') locked++; // spaces are already correct
-        }
-        if (locked <= chars.length) {
+        if (p < 1) {
           requestAnimationFrame(tick);
         } else {
           el.textContent = finalText; // settle exactly on the real text
           el.classList.remove('cracking');
         }
       }
-      setTimeout(() => requestAnimationFrame(tick), startDelay);
+      setTimeout(() => requestAnimationFrame(tick), START);
     }
 
-    // top line leads; accent word follows a beat later
-    crack($('.hero-title .hero-l1'), 260);
-    crack($('.hero-title .accent'), 480);
+    // both lines start and finish together
+    crack($('.hero-title .hero-l1'), DURATION);
+    crack($('.hero-title .accent'), DURATION);
   })();
 
   /* ---------- Active section in nav (scroll-driven) ---------- */
