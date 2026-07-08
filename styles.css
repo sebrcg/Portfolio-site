@@ -353,7 +353,7 @@ h1.hero-title {
 @keyframes blink { 50% { opacity: 0; } }
 
 /* one-time "hash crack" scramble on load */
-.hero-title .accent.cracking {
+.hero-title .cracking {
   animation: crackGlow 0.22s steps(2, end) infinite;
   will-change: filter;
 }
@@ -362,7 +362,7 @@ h1.hero-title {
   50% { filter: drop-shadow(0 0 5px var(--accent-glow)); }
 }
 @media (prefers-reduced-motion: reduce) {
-  .hero-title .accent.cracking { animation: none; filter: none; }
+  .hero-title .cracking { animation: none; filter: none; }
 }
 
 .hero-sub {
