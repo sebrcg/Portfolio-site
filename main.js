@@ -99,6 +99,70 @@
     reveal($('.hero-title .accent'));
   })();
 
+  /* ---------- Count-up on Work metrics (on scroll into view) ----------
+     Eases each number from 0 to its value the first time it enters the
+     viewport, keeping any prefix/suffix (e.g. the "+") and comma grouping
+     (1,000). Width is locked to the final size so the sentence around it
+     doesn't reflow. Runs once per number; skipped for reduced-motion /
+     Calm so the real values just show. */
+  (function metricCounters() {
+    const metrics = $$('.work-card .metric');
+    if (!metrics.length) return;
+
+    const fmt = (n, pre, suf) => pre + n.toLocaleString('en-US') + suf;
+
+    // parse each metric and lock its width to the final rendered size
+    const items = metrics.map(el => {
+      const text = (el.textContent || '').trim();
+      const m = text.match(/[\d,]+/);
+      if (!m) return null;
+      const target = parseInt(m[0].replace(/,/g, ''), 10);
+      const pre = text.slice(0, m.index);
+      const suf = text.slice(m.index + m[0].length);
+      el.style.display = 'inline-block';
+      el.style.fontVariantNumeric = 'tabular-nums';
+      el.style.minWidth = el.offsetWidth + 'px'; // measured while showing final text
+      return { el, target, pre, suf, done: false };
+    }).filter(Boolean);
+
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const calm = window.__TWEAKS__ && window.__TWEAKS__.motion === 'calm';
+    if (reduce || calm) return; // leave the real values in place
+
+    items.forEach(it => { it.el.textContent = fmt(0, it.pre, it.suf); });
+
+    const DURATION = 1200;
+    const easeOut = t => 1 - Math.pow(1 - t, 3);
+
+    function run(it) {
+      if (it.done) return;
+      it.done = true;
+      let start = 0;
+      function step(now) {
+        if (!start) start = now;
+        const p = Math.min(1, (now - start) / DURATION);
+        it.el.textContent = fmt(Math.round(easeOut(p) * it.target), it.pre, it.suf);
+        if (p < 1) requestAnimationFrame(step);
+        else it.el.textContent = fmt(it.target, it.pre, it.suf);
+      }
+      requestAnimationFrame(step);
+    }
+
+    function check() {
+      const vh = window.innerHeight;
+      items.forEach(it => {
+        if (it.done) return;
+        const r = it.el.getBoundingClientRect();
+        if (r.top < vh - 40 && r.bottom > 0) run(it);
+      });
+    }
+    requestAnimationFrame(() => requestAnimationFrame(check));
+    window.addEventListener('scroll', check, { passive: true });
+    window.addEventListener('resize', check);
+    // safety net: after 3s, finish anything still not triggered
+    setTimeout(() => items.forEach(run), 3000);
+  })();
+
   /* ---------- Active section in nav (scroll-driven) ---------- */
   const sections = $$('section[id]');
   const navLinks = $$('.nav a');
