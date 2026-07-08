@@ -25,6 +25,51 @@
   // Safety net: after 1.2s, force-reveal anything still hidden
   setTimeout(() => revealNodes.forEach(el => el.classList.add('in')), 1200);
 
+  /* ---------- Hero accent: one-time "hash crack" scramble ----------
+     Resolves the accent word left-to-right like a brute-forced hash,
+     then settles exactly on the real text. Runs once, never loops.
+     Skipped for reduced-motion / Calm so the copy just shows plain. */
+  (function heroCrack() {
+    const el = $('.hero-title .accent');
+    if (!el) return;
+    const finalText = (el.textContent || '').trim();
+    if (!finalText) return;
+
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const calm = window.__TWEAKS__ && window.__TWEAKS__.motion === 'calm';
+    if (reduce || calm) return; // leave the real word in place
+
+    const GLYPHS = '0123456789abcdef/\\<>*#';
+    const rand = () => GLYPHS[(Math.random() * GLYPHS.length) | 0];
+    const chars = finalText.split('');
+    // render: real chars up to `locked`, random glyphs after (spaces kept)
+    const frame = (locked) => chars
+      .map((c, i) => (i < locked ? c : (c === ' ' ? ' ' : rand())))
+      .join('');
+
+    let locked = 0, last = 0;
+    el.classList.add('cracking');
+    el.textContent = frame(0);
+
+    function tick(now) {
+      if (!last) last = now;
+      el.textContent = frame(locked); // flicker unlocked chars each frame
+      if (now - last >= 85) {
+        last = now;
+        locked++;
+        while (chars[locked] === ' ') locked++; // spaces are already correct
+      }
+      if (locked <= chars.length) {
+        requestAnimationFrame(tick);
+      } else {
+        el.textContent = finalText; // settle exactly on the real word
+        el.classList.remove('cracking');
+      }
+    }
+    // brief hold on the fully-scrambled word, then resolve
+    setTimeout(() => requestAnimationFrame(tick), 260);
+  })();
+
   /* ---------- Active section in nav (scroll-driven) ---------- */
   const sections = $$('section[id]');
   const navLinks = $$('.nav a');
