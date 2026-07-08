@@ -37,7 +37,7 @@
 
     const GLYPHS = '0123456789abcdef/\\<>*#';
     const rand = () => GLYPHS[(Math.random() * GLYPHS.length) | 0];
-    const STEP = 115; // ms between each character locking (higher = slower)
+    const STEP = 230; // ms between each character locking (higher = slower)
 
     function crack(el, startDelay) {
       if (!el) return;
