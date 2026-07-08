@@ -228,7 +228,6 @@
     $$('#theme-seg button').forEach(b => b.classList.toggle('active', b.dataset.val === t));
     // re-tint canvas accent for contrast feel (canvas uses CSS var indirectly)
     if (window.NodesFX) window.NodesFX.setAccent(getComputedStyle(document.documentElement).getPropertyValue('--accent').trim() || '#4f8cff');
-    if (window.HorizonFX) window.HorizonFX.setTheme(t);
   }
   const themeToggle = $('#theme-toggle');
   if (themeToggle) {
@@ -284,7 +283,6 @@
       root.setProperty('--accent-soft', hexToRgba(val, 0.18));
       root.setProperty('--accent-glow', hexToRgba(val, 0.35));
       if (window.NodesFX) window.NodesFX.setAccent(val);
-      if (window.HorizonFX) window.HorizonFX.setAccent(val);
       $$('#swatch-row .swatch').forEach(s => s.classList.toggle('active', s.dataset.val === val));
     }
     if (key === 'theme') setTheme(val);
@@ -296,7 +294,6 @@
     if (key === 'motion') {
       $$('#motion-seg button').forEach(b => b.classList.toggle('active', b.dataset.val === val));
       if (window.NodesFX) window.NodesFX.setMotion(val);
-      if (window.HorizonFX) window.HorizonFX.setMotion(val);
     }
   }
 
